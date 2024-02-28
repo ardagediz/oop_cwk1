@@ -11,7 +11,7 @@ import static java.lang.Math.toRadians;
 /**
  * Represents a point in space and time, recorded by a GPS sensor.
  *
- * @author Nick Efford & YOUR NAME
+ * @author Nick Efford & Arda Gediz
  */
 public class Point {
   // Constants useful for bounds checking, etc
