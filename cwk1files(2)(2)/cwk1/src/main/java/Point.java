@@ -7,7 +7,6 @@ import static java.lang.Math.sin;
 import static java.lang.Math.sqrt;
 import static java.lang.Math.toRadians;
 
-
 /**
  * Represents a point in space and time, recorded by a GPS sensor.
  *
@@ -34,22 +33,22 @@ public class Point {
 
   // TODO: Create a stub for getLatitude()
   public double getLongitude() {
-
+    return 0;
   }
 
   // TODO: Create a stub for getLongitude()
   public double getLatitude() {
-
+    return 0;
   }
 
   // TODO: Create a stub for getElevation()
   public double getElevation() {
-
+    return 0;
   }
 
   // TODO: Create a stub for toString()
   public String toString() {
-    
+
   }
 
   // IMPORTANT: Do not alter anything beneath this comment!
