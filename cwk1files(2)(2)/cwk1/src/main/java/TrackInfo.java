@@ -30,8 +30,10 @@ public class TrackInfo {
       System.out.printf("Average speed = %.3f m/s\n", track.averageSpeed());
     } catch (IOException e) {
       System.err.println("Error reading the track file: " + e.getMessage());
+      System.exit(1);
     } catch (GPSException e) {
       System.err.println("Error processing the track: " + e.getMessage());
+      System.exit(1);
     }
   
   }
