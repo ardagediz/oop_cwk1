@@ -16,7 +16,7 @@ import java.time.format.DateTimeParseException;
  */
 public class Track {
 
-  private List<Point> points; // Field to store Point objects
+  private List<Point> points; // Field to store the Point objects
 
   public Track() {
     this.points = new ArrayList<>();
@@ -28,32 +28,28 @@ public class Track {
   }
 
   public void readFile(String filename) throws IOException {
-    points.clear(); // Clears any existing points before reading new ones
+    points.clear(); // Clears the list before reading the file
     Path path = Paths.get(filename);
     try (Scanner scanner = new Scanner(path)) {
-        if (scanner.hasNextLine()) scanner.nextLine(); // Skip the header row
+      if (scanner.hasNextLine()) scanner.nextLine();
 
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            String[] parts = line.split(",");
-            if (parts.length != 4) {
-                throw new GPSException("Invalid record format");
-            }
-
-            // Parse each part. Note: No need to catch DateTimeParseException if the format is correct
-            ZonedDateTime time = ZonedDateTime.parse(parts[0]);
-            double longitude = Double.parseDouble(parts[1]);
-            double latitude = Double.parseDouble(parts[2]);
-            double elevation = Double.parseDouble(parts[3]);
-
-            // Create a new Point object and add it to the track
-            Point point = new Point(time, longitude, latitude, elevation);
-            add(point);
+      while (scanner.hasNextLine()) {
+        String line = scanner.nextLine();
+        String[] parts = line.split(",");
+        if (parts.length != 4) {
+          throw new GPSException("Invalid record format");
         }
+
+        ZonedDateTime time = ZonedDateTime.parse(parts[0]);
+        double longitude = Double.parseDouble(parts[1]);
+        double latitude = Double.parseDouble(parts[2]);
+        double elevation = Double.parseDouble(parts[3]);
+
+        Point point = new Point(time, longitude, latitude, elevation);
+        add(point);
+      }
     }
   }
-
-
 
   public void add(Point point) {
     points.add(point);
