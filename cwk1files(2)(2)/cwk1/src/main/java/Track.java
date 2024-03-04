@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.time.temporal.ChronoUnit;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents a point in space and time, recorded by a GPS sensor.
