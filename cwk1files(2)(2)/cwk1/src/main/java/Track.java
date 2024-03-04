@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.time.temporal.ChronoUnit;
+import java.io.PrintWriter;
+import java.io.FileNotFoundException;
 
 /**
  * Represents a point in space and time, recorded by a GPS sensor.
@@ -110,5 +112,48 @@ public class Track {
     if (totalSeconds == 0) throw new GPSException("Time interval is too short to compute speed.");
 
     return totalMeters / totalSeconds;
+  }
+
+  public void writeKML(String filename) throws FileNotFoundException {
+    try (PrintWriter pw = new PrintWriter(filename)) {
+      // Header
+      pw.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+      pw.println("<kml xmlns=\"http://www.opengis.net/kml/2.2\">");
+      pw.println("<Document>");
+      pw.println("<name>GPS Track</name>");
+        
+      // Style for the track
+      pw.println("<Style id=\"yellowLineGreenPoly\">");
+      pw.println("<LineStyle>");
+      pw.println("<color>7f00ffff</color>");
+      pw.println("<width>4</width>");
+      pw.println("</LineStyle>");
+      pw.println("<PolyStyle>");
+      pw.println("<color>7f00ff00</color>");
+      pw.println("</PolyStyle>");
+      pw.println("</Style>");
+        
+      // Placemark
+      pw.println("<Placemark>");
+      pw.println("<name>Track</name>");
+      pw.println("<styleUrl>#yellowLineGreenPoly</styleUrl>");
+      pw.println("<LineString>");
+      pw.println("<extrude>1</extrude>");
+      pw.println("<tessellate>1</tessellate>");
+      pw.println("<altitudeMode>absolute</altitudeMode>");
+      pw.println("<coordinates>");
+        
+      // Coordinates
+      for (Point point : points) {
+        pw.printf("%f,%f,%f\n", point.getLongitude(), point.getLatitude(), point.getElevation());
+      }
+        
+      // Footer
+      pw.println("</coordinates>");
+      pw.println("</LineString>");
+      pw.println("</Placemark>");
+      pw.println("</Document>");
+      pw.println("</kml>");
+    }
   }
 }
