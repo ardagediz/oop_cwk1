@@ -31,6 +31,7 @@ public class Track {
   public void readFile(String filename) throws IOException {
     points.clear(); // Clears the list before reading the file
     Path path = Paths.get(filename);
+
     try (Scanner scanner = new Scanner(path)) {
       if (scanner.hasNextLine()) scanner.nextLine();
 
@@ -49,7 +50,7 @@ public class Track {
         Point point = new Point(time, longitude, latitude, elevation);
         add(point);
       }
-    }
+    } 
   }
 
   public void add(Point point) {
